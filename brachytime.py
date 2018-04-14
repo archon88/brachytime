@@ -78,7 +78,7 @@ def treattime(sep, ulens, llens, delakr, deltime, midtime, halflife, presc):
         deldate=dt.strptime(deltime, '%Y-%m-%dT%H:%M')
         middate=dt.strptime(midtime, '%Y-%m-%dT%H:%M')        
     except Exception as e:
-        raise ValueError('Dates and times must be formatted according to ISO-8601 (YYYY-MM-DDTHH:MM)')
+        raise ValueError('Dates and times must be formatted according to ISO 8601 (YYYY-MM-DDTHH:MM)')
 
     if not (len(ulens) == len(llens)) and not (len(ulens) == len(llens)-1):
         raise ValueError('Numbers of wires in upper row must be equal to or one less than number of wires in lower row.')
