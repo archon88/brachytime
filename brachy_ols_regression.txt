@@ -1,3 +1,5 @@
+OLS quadratic regression for Ir-192 wires of lengths 50 mm, 60 mm, and 70 mm, using the OLS function from the Python statsmodels module.
+
 50 mm:
 
                             OLS Regression Results                            
