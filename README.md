@@ -2,7 +2,7 @@
 
 A simple Python utility to compute the treatment time for an interstitial applicator with wires forming the vertices of equilateral triangles in its midplane.
 
-A suitable applicator geometry is as shown below, with wire lengths in millimetres.
+A suitable applicator geometry is as shown below, with wire lengths (vertices of the equilateral triangles, denoted by black dots) in millimetres. The basal dose points are denoted by grey dots.
 
 ![](diagram.png)
 
