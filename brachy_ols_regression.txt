@@ -1,4 +1,4 @@
-This file documents the OLS quadratic OLS regression results for log10(doserate) against log10(distance) for Ir-192
+This file documents the quadratic OLS regression results for log10(doserate) against log10(distance) for Ir-192
 wires of lengths 50 mm, 60 mm, and 70 mm. This empirical data forms the basis of the calculation of dose rate at
 distance (per unit AKR) for each basal dose point.
 
