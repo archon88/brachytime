@@ -117,7 +117,7 @@ def treattime(sep, ulens, llens, delakr, deltime, midtime, halflife, presc):
     #Decay-correct the source activity to mid-treatment time, then use this to compute the MBDR and thus treatment time
     midakr = delakr*m.exp(-m.log(2)*((middate-deldate).total_seconds())/halflife)
     mbdr = midakr*np.mean([sum(i) for i in doserates])    
-    ttime = presc/(0.85*mbdr)
+    ttime = presc/(0.85*mbdr) #The RDR is 0.85*MBDR
     
     return float('%.1f' % round(ttime, 1))
  
