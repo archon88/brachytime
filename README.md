@@ -2,7 +2,7 @@
 
 A simple Python utility to compute the treatment time for an interstitial applicator with wires forming the vertices of equilateral triangles in its midplane.
 
-A suitable applicator geometry is as shown below
+A suitable applicator geometry is as shown below, with wire lengths in millimetres.
 
 ![](diagram.png)
 
