@@ -73,7 +73,7 @@ def treattime(sep, ulens, llens, delakr, deltime, midtime, halflife, presc):
     if halflife == None:
         halflife = 6379000
     
-    #Ensure dates formatted according to ISO-8601
+    #Ensure dates formatted according to ISO 8601
     try:
         deldate=dt.strptime(deltime, '%Y-%m-%dT%H:%M')
         middate=dt.strptime(midtime, '%Y-%m-%dT%H:%M')        
