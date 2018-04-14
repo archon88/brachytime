@@ -37,7 +37,6 @@
 
 import numpy as np
 import math as m
-import docopt
 from datetime import datetime as dt
 import scipy.interpolate as spi
 
