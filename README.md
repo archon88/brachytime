@@ -2,7 +2,7 @@
 
 A simple Python utility to compute the treatment time for an interstitial applicator with wires forming the vertices of equilateral triangles in its midplane.
 
-A suitable applicator geometry is as shown below, with wire lengths (vertices of the equilateral triangles, denoted by black dots) in millimetres. The basal dose points are denoted by grey dots. OLS quadratic fits were performed to log10(doserate) against log10(distance) to establish a functional relationship between these quantities for wires of length 50 mm, 60 mm, and 70 mm; linear interpolation is performed for wires of intermediate length.
+A suitable applicator geometry is as shown below, with wire lengths (vertices of the equilateral triangles, denoted by black dots) in millimetres. The basal dose points are denoted by grey dots. OLS quadratic fits were performed to log10(doserate) against log10(distance) to establish a functional relationship between these quantities for wires of length 50 mm, 60 mm, and 70 mm; linear interpolation is performed for wires of intermediate length. It is assumed that these functional relationships hold for isotopese other than Ir-192.
 
 ![](diagram.png)
 
