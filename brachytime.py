@@ -121,5 +121,5 @@ def treattime(sep, ulens, llens, delakr, deltime, midtime, halflife, presc):
     return float('%.1f' % round(ttime, 1))
  
 if __name__ == "__main__":
-    print(__version__)
+    print('This is brachytime version {version}'.format(version=__version__))
     exit()
