@@ -44,19 +44,24 @@ import scipy.interpolate as interp
 __version__ = '2019-07-07T22:00:00Z'
 
 
-# Return the treatment time in hours.
-# If no halflife is specified, assume it's Ir-192.
 def calculate_treatment_time(
     separation, upper_lengths, lower_lengths, delivery_akr,
     delivery_datetime, mid_treatment_datetime,
     prescribed_dose, halflife=6379000, printout=False):
-    
+    """
+    Calculate the treatment time in hours for an applicator of given geometry.
+    Applicator separation and upper and lower wire lengths are in millimetres.
+    Datetimes are formatted according to ISO-8601, with the exception that
+    the seconds and the final "Z" are suppressed, e.g. "2019-07-07T22:00".
+    The prescribed dose is in grays, and the AKR is in milligrays per hour.
+    If no halflife is specified, default to Ir-192.
+    """    
     # Parse datetimes, assuming they are formatted according to ISO 8601.
     try:
         delivery_datetime = dt.strptime(delivery_datetime, '%Y-%m-%dT%H:%M')
         mid_treatment_datetime = dt.strptime(mid_treatment_datetime, '%Y-%m-%dT%H:%M')        
     except Exception:
-        raise ValueError('Dates and times must be formatted according to ISO 8601 (YYYY-MM-DDTHH:MM)')
+        raise ValueError('Dates and times must be formatted as YYYY-MM-DDTHH:MM!')
 
     # Without loss of generality, define the lower row to be the larger.
     if not (len(upper_lengths) == len(lower_lengths)) and not (len(upper_lengths) == len(lower_lengths)-1):
@@ -103,9 +108,11 @@ def calculate_treatment_time(
         print(f'The treatment time is {round(treatment_time, 1)} hours.')
 
 
-# Return the dose rate in Gy/h at a given distance (mm) from a wire of length between 50 mm and 70 mm.
-# Formulae come from quadratic OLS fits of log10(doserate) to log10(distance).
 def calculate_dose_rate(wire_length, distance):
+    """
+    Return the dose rate in Gy/h at a given distance (mm) from a wire of length between 50 mm and 70 mm.
+    Formulae come from quadratic OLS fits of log10(doserate) to log10(distance).
+    """
     distance = m.log10(distance)
     # Case analysis of wire lengths    
     if wire_length == 50:
@@ -115,19 +122,20 @@ def calculate_dose_rate(wire_length, distance):
     elif wire_length == 70:
         doserate = -0.2891*distance**2 - 0.6861*distance + 0.4288 
     elif (50 < wire_length < 60) or (60 < wire_length < 70):
-        doserate = m.log10(interpolate_dose(wire_length, pow(10, distance)))
+        doserate = m.log10(interpolate_doserate(wire_length, pow(10, distance)))
     else:
         raise ValueError('Wire length outside range [50, 70]!')
 
     return pow(10, doserate)
 
 
-# Use linear interpolation for wires of intermediate length.
-def interpolate_dose(wire_length, distance):
+def interpolate_doserate(wire_length, distance):
+    """Use linear interpolation to calculate dose rates for wires of intermediate length."""
     reference_lengths  = [50, 60, 70]
-    doseatlens = [calculate_dose_rate(i, distance) for i in reference_lengths]
-    y_interp = interp.interp1d(reference_lengths, doseatlens)
-    return float(y_interp(wire_length))  # This is the interpolated doserate.  
+    doses_at_lengths = [calculate_dose_rate(i, distance) for i in reference_lengths]
+    interpolator = interp.interp1d(reference_lengths, doses_at_lengths)
+
+    return float(interpolator(wire_length))  # This is the interpolated doserate.  
 
 
 if __name__ == "__main__":
